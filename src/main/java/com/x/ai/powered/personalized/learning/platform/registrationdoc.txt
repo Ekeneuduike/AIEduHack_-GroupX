@@ -1,0 +1,11 @@
+for registration user has to hit the endpoint http://localhost:8181/api/hackerX/registration/register
+with the following values firstname,lastname,email,and password
+{"firstname":"hello","lastname":"hi",
+"email":"hello@hi.com", "password":"password"
+} represented in json. if operation is successful
+then the user receives a confirmation email which expires in 15 minutes if
+user fails to confirm email in time a regeneration link is generated to create a new confirmation email.
+to perform a login in request you have to send a login request to the endpoint
+http://localhost:8181/login with the value username and password
+on successful login a login session is created
+an assigned to the user
