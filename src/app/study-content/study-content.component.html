@@ -1,0 +1,235 @@
+
+
+
+<mat-progress-bar
+  mode="indeterminate"
+  color="warn"
+  id="loading"
+></mat-progress-bar>
+
+
+<!-- sidenav -->
+
+<div class="sidebar">
+  <div *ngFor="let subject of getCurrentCourse().subjects">
+    <a href="/subject/{{subject.id}}" [ngClass]="{'active': subjectid === subject.id}">
+      {{ subject.name | uppercase }}</a
+    >
+  </div>
+</div>
+
+<!-- main content -->
+
+<div class="content">
+  <div *ngIf="studycontent">
+    <div [innerHTML]="studycontent"></div>
+    <div class="btn-fotter">
+
+    </div>
+  </div>
+  <div class="errormessage" id="error">
+    <h3>Failed to fetch resource from server try again later.</h3>
+  </div>
+</div>
+
+<!-- chat content  -->
+
+<div class="chat-container" id="chatbox">
+  <div class="close-btn">
+    <button class="btn btn-danger" (click)="closechat()">close</button>
+  </div>
+  <div class="chat">
+    <div class="header"><h5>ask me your questions</h5></div>
+
+    <div class="d-chat" *ngFor="let chat of chatdetails; let i = index">
+      <p>
+        <em>{{ chat.question }}</em>
+      </p>
+      <div></div>
+      <div class="chat-m" [innerHTML]="chat.response"></div>
+    </div>
+    <div class="error" id="chat-error">
+      sorry we couldn't get a response from our server at this time
+    </div>
+    <p
+      id="load"
+      class="loading"
+      style="color: rgb(255, 255, 255); display: none"
+    >
+      ...
+    </p>
+  </div>
+  <div class="input-area">
+    <div style="width: 100%; padding: 10px 5px">
+      <div contenteditable="true" class="input" id="divtext">
+        <textarea
+          name=""
+          id=""
+          cols="28"
+          rows="10"
+          [formControl]="question"
+          type="text"
+          placeholder="ask me anything"
+        ></textarea>
+      </div>
+      <button
+        (click)="askai()"
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="chatbot" id="chaticon">
+  <div class="example-button-container">
+    <button
+      mat-fab
+      color="warn"
+      aria-label="Example icon button with a home icon"
+      (click)="openchat()"
+    >
+      <mat-icon>chat</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-- test content  -->
+<div class="test-btn" id="test-btn">
+  <button class="btn btn-primary" (click)="startTest()">take a test</button>
+</div>
+
+<div class="test" id="q1">
+  <div class="question1">
+    <div class="header mb-4">
+      <button class="btn btn-danger" (click)="closeTest()">close</button>
+    </div>
+
+    <h2>Answer all 5 questions to see how you perform</h2>
+
+    <div *ngIf="!questions || questions.length < 1" id="myload">
+      please wait:
+
+      <p
+        class="loading"
+        style="color: black; font-size: xx-large; font-weight: 12000"
+      >
+        ...
+      </p>
+    </div>
+
+    <div *ngIf="questions && questions.length > 1">
+      <div *ngFor="let question of questions; let i = index">
+        <div class="quiz-container">
+          <h4>{{ question.name }}</h4>
+          <p class="question">{{ question.questions }}</p>
+
+          <label class="option">
+            {{ question.options.option1 }}
+            <input
+              type="radio"
+              name="language{{ i }}"
+              value="a"
+              (click)="getselectedOption(i, $event)"
+            />
+            <span class="checkmark"></span>
+          </label>
+          <label class="option">
+            {{ question.options.option2 }}
+            <input
+              type="radio"
+              name="language{{ i }}"
+              value="b"
+              (click)="getselectedOption(i, $event)"
+            />
+            <span class="checkmark"></span>
+          </label>
+          <label class="option">
+            {{ question.options.option3 }}
+            <input
+              type="radio"
+              name="language{{ i }}"
+              value="c"
+              (click)="getselectedOption(i, $event)"
+            />
+            <span class="checkmark"></span>
+          </label>
+          <label class="option">
+            {{ question.options.option4 }}
+            <input
+              type="radio"
+              name="language{{ i }}"
+              value="d"
+              (click)="getselectedOption(i, $event)"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-primary m-3" (click)="getscore()">submit</button>
+    </div>
+
+    <div class="message" id="mes1">
+      <div class="fail">
+        <h4>Here is your score:</h4>
+        <h5>
+          You scored {{ score }} in this test keep it up and keep learning
+        </h5>
+        <button class="btn btn-primary" (click)="closeTest()">ok</button>
+      </div>
+    </div>
+
+    <div id="e2">
+      <h3>Sorry we couldn't get any response from server try again later</h3>
+    </div>
+
+    <style>
+      #e2 {
+        display: none;
+      }
+      .test-btn {
+        position: fixed;
+        top: 90%;
+        left: 6%;
+        z-index: 10;
+      }
+      .btn-fotter {
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .test {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(222, 222, 222);
+        position: fixed;
+        z-index: 10;
+        top: 5%;
+        display: none;
+        margin-top: 30px;
+      }
+      .question1 {
+        margin: 30px;
+        padding-top: 30px;
+        overflow-y: scroll;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 40px;
+        height: 80%;
+      }
+      .activ-question {
+        display: block;
+      }
+      .quiz-container {
+        width: 100%;
+        text-align: start;
+        margin-top: 20px;
+      }
+    </style>
+  </div>
+</div>
+
+

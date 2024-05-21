@@ -1,0 +1,96 @@
+
+<div class="shell" id="success">
+  <img src="assets/R.png" alt="Card Image">
+  <div class="shell-content">
+      <h3>Success</h3>
+      <p>you have enrolled for this course</p>
+  </div>
+  <button class="btn btn-success" routerLink="/">ok</button>
+</div>
+
+<style>
+  .shell {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    padding-top: 0px;
+    background-color: #f9f9f9;
+    width: 300px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    visibility: hidden;
+    transition: 0.4s all;
+}
+.open{
+  top: 50%;
+  visibility: visible;
+}
+
+.shell img {
+    width: 70px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.shell-content {
+    margin-top: 10px;
+}
+
+.shell h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.shell p {
+    font-size: 14px;
+    color: #555;
+}
+
+</style>
+
+<div style="text-align: center; margin-top: 20px;" *ngIf="!course">
+  Loading
+  <p
+  id="load"
+  class="loading"
+>
+  ...
+</p>
+</div>
+
+<div style="margin: 20px;" class="card" *ngIf="course">
+    <h3 class="card-header">{{course.name }}</h3>
+    <img src="data:{{course.filetype}};base64,{{course.thumbnail}}" alt="alt" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">Course Description</h5>
+      <p class="card-text">{{course.description}}</p>
+    </div>
+    <div class="quiz-container">
+      <p class="question">What is your experience level with this course?</p>
+      <label class="option">
+          <input type="radio" name="language"  value=1 [formControl]="response"  >
+          <span class="checkmark"></span>
+          Beginner
+      </label>
+      <label class="option">
+          <input type="radio" name="language" value=2 [formControl]="response">
+          <span class="checkmark"></span>
+          Intermidate
+      </label>
+      <label class="option">
+          <input type="radio" name="language" value=3 [formControl]="response">
+          <span class="checkmark"></span>
+          Advanced
+      </label>
+  </div>
+    <div class="card-body">
+      <button (click)="enroll()"  class="btn btn-primary" [disabled]="!(response.valid && response.touched)" >Enroll</button>
+    </div>
+  
+
+  </div>

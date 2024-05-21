@@ -1,0 +1,137 @@
+.card-img-top {
+  height: 30vh;
+  object-fit: cover;
+  width: 100%;
+}
+.card-text{
+    text-decoration: none;
+    color: rgb(37, 36, 36);
+    cursor: pointer;
+}
+.card-text:hover{
+    border-bottom: 1px solid rgb(48, 48, 48) ;
+}
+.courses {
+  margin-top: 50px;
+  text-align: center;
+}
+.courses h5 {
+  color: rgb(255, 136, 0);
+}
+.courselist {
+  padding: 40px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.info {
+  color: green;
+  text-align: justify;
+}
+.img h1 {
+  color: darkorange;
+}
+.img h5 {
+  color: rgb(0, 0, 0);
+}
+.img1 {
+  background-image: url(src/assets/photo.jpeg);
+  height: 90dvh;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+.img2 {
+  background-image: url(src/assets/photo2.png);
+  height: 90dvh;
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+.img3 {
+  background-image: url(src/assets/photo3.jpg);
+  height: 90dvh;
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+.img h1 h5 {
+  text-align: left;
+}
+.img h1 {
+  font-weight: 800;
+  font-size: 900;
+}
+.img {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  /* align-items: center; */
+  padding: 80px;
+}
+
+#slider {
+  overflow: hidden;
+}
+#slider figure {
+  position: relative;
+  width: 400%;
+  margin: 0;
+  left: 0;
+  animation: 15s slider infinite;
+}
+#slider figure .img {
+  float: left;
+  width: 25%;
+}
+@keyframes slider {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: 0;
+  }
+  35% {
+    left: -100%;
+  }
+  55% {
+    left: -100%;
+  }
+  65% {
+    left: -200%;
+  }
+  90% {
+    left: -200%;
+  }
+  100% {
+    left: -300%;
+  }
+}
+
+/* loader  */
+.loading {
+  font-weight: bold;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 30px;
+  clip-path: inset(0 3ch 0 0); /* Adjust the width as needed */
+  animation: loading 1s steps(4) infinite;
+  color: black;
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    clip-path: inset(0 3ch 0 0);
+  }
+  25% {
+    clip-path: inset(0 2ch 0 0);
+  }
+  50% {
+    clip-path: inset(0 1ch 0 0);
+  }
+  75% {
+    clip-path: inset(0 0 0 0);
+  }
+}

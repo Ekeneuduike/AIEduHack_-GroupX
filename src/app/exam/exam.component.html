@@ -1,0 +1,142 @@
+<mat-progress-bar
+  mode="indeterminate"
+  color="warn"
+  id="loading"
+></mat-progress-bar>
+
+<div class="errormessage" id="error">
+  <h3>Failed to fetch resource from server try again later.</h3>
+</div>
+
+<div class="body" *ngIf="questions">
+  <h3>Final test for the {{ currentCourse.name }}</h3>
+
+  <div *ngFor="let question of questions; let i = index">
+    <div class="quiz-container">
+      <h4>{{ question.name }}</h4>
+      <p class="question">{{ question.questions }}</p>
+      <label class="option">
+        <input
+          type="radio"
+          name="language{{ i }}"
+          value="a"
+          (click)="setSelectedOption(i, $event)"
+        />
+        <span class="checkmark"></span>
+        {{ question.options.option1 }}
+      </label>
+      <label class="option">
+        <input
+          type="radio"
+          name="language{{ i }}"
+          value="b"
+          (click)="setSelectedOption(i, $event)"
+        />
+        <span class="checkmark"></span>
+        {{ question.options.option2 }}
+      </label>
+      <label class="option">
+        <input
+          type="radio"
+          name="language{{ i }}"
+          value="c"
+          (click)="setSelectedOption(i, $event)"
+        />
+        <span class="checkmark"></span>
+        {{ question.options.option3 }}
+      </label>
+      <label class="option">
+        <input
+          type="radio"
+          name="language{{ i }}"
+          value="d"
+          (click)="setSelectedOption(i, $event)"
+        />
+        <span class="checkmark"></span>
+        {{ question.options.option4 }}
+      </label>
+    </div>
+  </div>
+
+  <div class="later">
+    <button class="btn btn-primary" (click)="scoreUser()">submit</button>
+  </div>
+</div>
+
+<div class="message" id="mes1">
+  <div class="fail" *ngIf="score > 70">
+    <h4>Congrats you have passed this course</h4>
+    <h5>Now go on and Build something great Happy coding</h5>
+    <button class="btn btn-primary" routerLink="/">ok</button>
+  </div>
+  <div class="fail" *ngIf=" score< 70">
+    <h4>sorry you didn't pass</h4>
+    <h5>Go harder this time you have got this</h5>
+    <button class="btn btn-primary" routerLink="/">ok</button>
+  </div>
+</div>
+
+<style>
+  .message {
+    width: 350px;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    visibility: hidden;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(189, 209, 205);
+    transition: 0.5s all;
+  }
+  .open-me{
+    top: 50%;
+    visibility: visible;
+  }
+
+  .fail {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  .fail h5 {
+    margin: 30px 0;
+  }
+  .fail .btn {
+    margin: 30px 0;
+    padding: 10px 20px;
+  }
+  .fail h4 {
+    margin: 35px 0;
+  }
+</style>
+
+<style>
+  .errormessage {
+    width: 90dvw;
+    height: 70dvh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .errormessage h3 {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  }
+  .later {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 30px;
+  }
+  .body {
+    width: 90dvw;
+    text-align: center;
+    margin: 20px auto;
+  }
+  .quiz-container {
+    width: 100%;
+    text-align: start;
+    margin-top: 20px;
+  }
+</style>

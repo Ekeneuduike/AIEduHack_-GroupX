@@ -1,0 +1,44 @@
+
+
+<div class="search-bar">
+  <input type="text" id="search-input" [formControl]="searchInfo" placeholder="Search...">
+  <button id="search-button" (click)="search()">Search</button>
+</div>
+
+
+<div style="text-align: center; margin-top: 20px;" *ngIf="load">
+  Loading
+  <p
+  id="load"
+  class="loading"
+>
+  ...
+</p>
+</div>
+
+<div style="margin: 20px; padding: 20px;">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let course of courses; let i = index ">
+      <div class="card h-100">
+        <img
+          [src]="course.thumbnail"
+          class="card-img-top"
+          alt="course thumbnail"
+          
+          style="overflow: 0;"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ course.name }}</h5>
+          <a routerLink="/course/{{ course.id }}" class="card-text">
+            {{  course.description | slice:0:50}}...
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="(courses.length<1) && !load"
+ style="text-align: center;">
+ <h2>Could not find any</h2>
+</div>

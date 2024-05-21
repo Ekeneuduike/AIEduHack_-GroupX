@@ -1,0 +1,17 @@
+{
+  "/api": {
+    "target": "http://43.205.140.67:8181",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/login": {
+    "target": "http://43.205.140.67:8181",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/logout": {
+    "target": "http://43.205.140.67:8181",
+    "secure": false,
+    "changeOrigin": false
+  }
+}

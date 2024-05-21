@@ -1,0 +1,337 @@
+
+
+.topic {
+  margin: 40px 20px;
+}
+.para {
+  margin: 40px 20px;
+}
+.subtopic {
+  margin: 30px 20px;
+}
+.error {
+  display: none;
+}
+/* error */
+.errormessage {
+  width: 90dvw;
+  height: 70dvh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.btn-fotter {
+  margin: 80px 10px;
+  border-top: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+  flex-direction: start;
+}
+.btn-fotter .next {
+  flex: 1;
+  text-align: end;
+}
+/* message */
+.message {
+  width: 350px;
+  height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  visibility: hidden;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(189, 209, 205);
+  transition: 0.5s all;
+}
+.open-me {
+  top: 50%;
+  visibility: visible;
+}
+
+.fail {
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+.fail h5 {
+  margin: 30px 0;
+}
+.fail .btn {
+  margin: 30px 0;
+  padding: 10px 20px;
+}
+.fail h4 {
+  margin: 35px 0;
+}
+/* here is for the chat box */
+.chat-container {
+  width: 300px;
+  height: 600px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 40px 0;
+  background-color: #000000;
+  border-radius: 10px;
+  display: none;
+}
+.chat {
+  width: 300px;
+  height: 380px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  overflow-y: scroll;
+}
+.d-chat {
+  width: 100%;
+}
+.chat-m {
+  width: 270px;
+  border-radius: 10px;
+  background-color: #242426c1;
+  margin: auto;
+  color: white;
+}
+.input-area button {
+  margin-left: 200px;
+  margin-top: 20px;
+}
+.input-area {
+  width: 270px;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 140px;
+  background-color: #242121;
+  z-index: 2;
+  margin: auto;
+  margin-top: 10px;
+}
+.close-btn {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.input {
+  height: 60px;
+  width: 250px;
+  overflow-y: scroll;
+  margin: auto;
+  color: #ccc;
+}
+.input:focus {
+  outline: none;
+  color: white;
+  cursor: text;
+}
+.input textarea {
+  width: 100%;
+  height: auto;
+  text-wrap: wrap;
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+}
+.input textarea:focus {
+  outline: none;
+  border: none;
+}
+
+.chatbot {
+  position: fixed;
+  top: 90%;
+  left: 80%;
+  z-index: 1;
+}
+.open {
+  display: block;
+}
+.close {
+  display: none;
+}
+
+/* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  overflow-y: scroll;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+   /* Adjust as needed */
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    height: 80px;
+    display: inline-flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 10px;
+  }
+  .sidebar a {
+    margin: auto;
+  }
+  div.content {
+    margin-left: 0;
+    margin-top: 100px;
+  }
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  /* .sidebar a {
+        text-align: center;
+        float: none;
+    } */
+  .sidebar {
+    display: none;
+  }
+  .sidebar {
+    height: 80px;
+    display: inline-flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 10px;
+  }
+  .sidebar a {
+    margin: auto;
+  }
+  div.content {
+    margin-left: 0;
+    margin-top: 100px;
+  }
+}
+
+/* for questions  */
+.quiz-container {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.question {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.option {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.option:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.option input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.option input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+/* loader */
+.loading {
+  font-weight: bold;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 30px;
+  clip-path: inset(0 3ch 0 0); /* Adjust the width as needed */
+  animation: loading 1s steps(4) infinite;
+  color: white;
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    clip-path: inset(0 3ch 0 0);
+  }
+  25% {
+    clip-path: inset(0 2ch 0 0);
+  }
+  50% {
+    clip-path: inset(0 1ch 0 0);
+  }
+  75% {
+    clip-path: inset(0 0 0 0);
+  }
+}

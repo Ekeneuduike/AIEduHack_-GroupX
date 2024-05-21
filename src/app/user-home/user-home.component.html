@@ -1,0 +1,116 @@
+
+<div id="slider">
+  <!-- <div class="info">
+      <h5>THE BEST ONLINE LEARNING PLATFORM</h5>
+      <h1>
+        HERE WE GIVE YOU THE COURSE FOR YOU WITH THE LASTEST CUTTING EDGE AI
+        TECHNOLOGY
+      </h1>
+      <button class="btn" style="background-color: darkorange">
+        Enroll for free
+      </button>
+    </div> -->
+  <figure>
+    <div class="img img1">
+      <h5>THE BEST ONLINE LEARNING PLATFORM</h5>
+      <h1>
+        HERE WE GIVE YOU THE COURSE FOR YOU WITH THE LASTEST CUTTING EDGE AI
+        TECHNOLOGY
+      </h1>
+    </div>
+    <div class="img img2">
+      <h5>THE BEST ONLINE LEARNING PLATFORM</h5>
+      <h1>LEARN WITH THE LATEST TECHNOLOGY</h1>
+    </div>
+
+    <div class="img img3">
+      <h5>THE BEST ONLINE LEARNING PLATFORM</h5>
+      <h1>EXPERIENCE LEARNING LIKE NEVER BEFORE</h1>
+    </div>
+    <div class="img img1">
+      <h5>THE BEST ONLINE LEARNING PLATFORM</h5>
+      <h1>
+        HERE WE GIVE YOU THE COURSE FOR YOU WITH THE LASTEST CUTTING EDGE AI
+        TECHNOLOGY
+      </h1>
+    </div>
+  </figure>
+</div>
+
+<div class="courses">
+  <h5>COURSES</h5>
+  <h1>EXPLORE OUR TOP COURSES</h1>
+</div>
+
+<div class="courselist">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100">
+        <img src="assets/frontend.jpeg" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <p class="card-text" style="font-weight: 900">frontend course</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img src="assets/finance.jpg " class="card-img-top" alt="..." />
+        <div class="card-body">
+          <p class="card-text" style="font-weight: 900">finicial course</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img src="assets/backend.jpg" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <p class="card-text" style="font-weight: 900">backend course</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img src="assets/crypto.jpg" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <p class="card-text" style="font-weight: 900">crypto course</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="courses">
+  <h5>COURSES</h5>
+  <h1>COURSES FOR YOU</h1>
+</div>
+
+<div *ngIf="!loaded" style="text-align: center;">
+  loading
+  <p class="loading">...</p>
+</div>
+
+<div *ngIf="iserror" class="fail m-5" style="text-align: center;">
+     <h2>Network Error ! Please refresh </h2>
+</div>
+
+<div style="margin: 20px; padding: 20px;">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let course of courses; let i = index ">
+      <div class="card h-100">
+        <img
+          [src]="course.thumbnail"
+          class="card-img-top"
+          alt="course thumbnail"
+          
+          style="overflow: 0;"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ course.name }}</h5>
+          <a routerLink="/course/{{ course.id }}" class="card-text">
+            {{  course.description | slice:0:50}}...
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

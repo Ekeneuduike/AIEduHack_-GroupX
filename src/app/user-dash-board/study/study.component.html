@@ -1,0 +1,34 @@
+
+
+<div style="text-align: center; margin-top: 20px;" *ngIf="!course">
+  Loading
+  <p
+  id="load"
+  class="loading"
+>
+  ...
+</p>
+</div>
+
+<div style="margin-top: 20px" *ngIf="course">
+  <div class="module-container" >
+    <h1 class="module-title">
+      {{course.name}}
+    </h1>
+    <ol class="module-list" *ngFor="let subject of course.subjects; let i = index">
+      <li>
+        <span class="module-number">{{i +1}}</span>
+      <a  routerLink="/subject/{{subject.id}}">
+        <span class="module-description">
+          {{subject.name}}</span
+        >
+      </a>
+       
+      </li>
+      <!-- Add more list items as needed -->
+    </ol>
+    <button class="btn btn-primary" routerLink="/test/{{course.id}}"> take course test</button>
+  </div>
+ 
+</div>
+

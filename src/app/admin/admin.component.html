@@ -1,0 +1,165 @@
+
+  <body style="text-align: center; margin-top: 20px">
+    <div
+      style="
+        background-color: lightgreen;
+        max-width: 450px;
+        margin: auto;
+        border-radius: 6px;
+        display: none;
+        padding-top: 20px;
+      "
+      id="success"
+    >
+      <h4>{{ successMeassage }}</h4>
+      <button
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon"
+        (click)="closDialog()"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+    <mat-progress-bar
+      mode="determinate"
+      id="p-bar"
+      value="{{ uploadProgress }}"
+      class="p-bar"
+    ></mat-progress-bar>
+
+    <h1>Add Courses</h1>
+    <div class="form-container">
+      <form [formGroup]="addCourse">
+        <div class="form-group">
+          <label for="name"> Course Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            formControlName="name"
+            [style.border]="
+              addCourse.controls.name.invalid && addCourse.controls.name.touched
+                ? '1px solid red'
+                : '1px solid #ccc'
+            "
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            formControlName="description"
+            [style.border]="
+              addCourse.controls.description.invalid &&
+              addCourse.controls.description.touched
+                ? '1px solid red'
+                : '1px solid #ccc'
+            "
+          ></textarea>
+        </div>
+
+        <div
+          *ngIf="addCourse.controls.subjects.invalid && addCourse.touched"
+          style="color: red"
+        >
+          * please add subjects
+        </div>
+
+        <mat-expansion-panel
+          class="sudo"
+          hideToggle
+          formArrayName="subjects"
+          #tog
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <strong>Click here to add Subjets</strong>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div
+            class="nested-form"
+            *ngFor="let subject of subjects.controls; let i = index"
+          >
+            <div class="form-group" [formGroupName]="i">
+              <label for="subject-name">Subject Name</label>
+              <div class="inline">
+                <input
+                  type="text"
+                  id="subject-name"
+                  name="subject-name"
+                  formControlName="name"
+                  required
+                  [style.border]="
+                    addCourse.controls.subjects.invalid &&
+                    addCourse.controls.subjects.touched
+                      ? '1px solid red'
+                      : '1px solid #ccc'
+                  "
+                />
+                <button
+                  mat-icon-button
+                  color="warn"
+                  aria-label="Example icon button with a home icon"
+                  (click)="removeSubject(i)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn btn-primary"
+            (click)="addSubject()"
+            style="margin-top: 20px"
+          >
+            Add Subject
+          </button>
+        </mat-expansion-panel>
+      </form>
+
+      <div
+        *ngIf="thumbnail.invalid && addCourse.touched"
+        style="color: red; margin: 20px 0"
+      >
+        please uplaoad thumbnail image
+      </div>
+
+      <div style="margin: 20px 0" class="form-group">
+        <input
+          type="file"
+          id="thumbnail"
+          name="thumbnail"
+          accept="image/*"
+          [formControl]="thumbnail"
+          required
+          class="image-input"
+          (change)="onImageSelected($event)"
+          #imageInput
+        />
+        <label for="thumbnail">Thumbnail</label>
+        <div class="image-selector">
+          {{ thumbnail_name || "no file selected yet" }}
+          <button
+            mat-icon-button
+            aria-label="attachfile icon"
+            (click)="imageInput.click()"
+          >
+            <mat-icon>attach_file</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group thumbnail-input"></div>
+
+      <button
+        (click)="submit()"
+        class="btn btn-primary"
+        [disabled]="!(addCourse.valid && thumbnail.valid)"
+        style="margin-top: 20px"
+      >
+        Submit
+      </button>
+    </div>
+  </body>
+

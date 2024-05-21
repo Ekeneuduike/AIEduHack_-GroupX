@@ -1,0 +1,226 @@
+<div class="dashboard-sidebar">
+  <a (click)="navtoPro()">Profile</a>
+  <a (click)="navtoEnroll()">Enrolled</a>
+  <a (click)="navtoCom()">Completed</a>
+  <a routerLink="/admin" *ngIf="isAdmin()">admin</a>
+  <a (click)="logout()">Logout</a>
+</div>
+
+<div class="sidenav">
+  <a (click)="navtoPro()"><button class="btn">Profile</button></a>
+  <a (click)="navtoEnroll()"><button class="btn">Enrolled</button></a>
+  <a (click)="navtoCom()"><button class="btn">Completed</button></a>
+  <a routerLink="/admin" *ngIf="isAdmin()"
+    ><button class="btn">admin</button></a
+  >
+  <a (click)="logout()"><button class="btn">Logout</button></a>
+</div>
+
+<!-- dashboard-main -->
+<div class="dashboard-main">
+  <div class="profile" id="profile">
+    <div class="profile_img">
+      <input
+        type="file"
+        id="profile_img"
+        (change)="getImage($event)"
+        #profileimage
+        style="display: none"
+      />
+      <img
+        src="data:image\png;base64,{{ LoggednUser.profile_img }}"
+        alt="profile image"
+        width="150px"
+        height="150px"
+        style="cursor: pointer"
+        class="profile-image"
+      />
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+        (click)="openchangeImageModal()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <div class="profile_info">
+      <h3>Name: {{ LoggednUser.firstname }}</h3>
+      <h3>Email: {{ LoggednUser.email }}</h3>
+      <h3>age: {{ LoggednUser.age }}</h3>
+    </div>
+
+    <button class="btn mt-3 btn-danger" (click)="changePassword()">
+      change password
+    </button>
+  </div>
+
+  <div class="profile" id="enroll">
+    <h3>Enrolled Courses</h3>
+
+    <div *ngIf="!en_loaded" style="text-align: center">
+      Loading
+      <p class="loading">...</p>
+    </div>
+    <div
+      *ngIf="en_loaded && enrolledCourse.length < 1"
+      style="text-align: center"
+      class="m-5"
+    >
+      <h3>You haven't enrolled for any course yet</h3>
+    </div>
+    <div *ngIf="en_error" style="text-align: center" class="m-5">
+      <h3>Network error please retry again later</h3>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" *ngFor="let enrolled of enrolledCourse; let i = index">
+        <div class="card h-100">
+          <img [src]="enrolled.thumbnail" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ enrolled.name }}</h5>
+            <p class="card-text">
+              {{ enrolled.description }}
+            </p>
+          </div>
+          <button
+            mat-icon-button
+            aria-label="Example icon button with a open in new tab icon"
+            routerLink="/study/{{ enrolled.id }}"
+          >
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile" id="completed">
+    <h3>Completed Courses</h3>
+    <div *ngIf="!com_loaded" style="text-align: center">
+      Loading
+      <p class="loading">...</p>
+    </div>
+    <div
+      *ngIf="com_loaded && completedCourses.length < 1"
+      style="text-align: center"
+      class="m-5"
+    >
+      <h3>You haven't Completed any course yet</h3>
+    </div>
+    <div *ngIf="com_error" style="text-align: center" class="m-5">
+      <h3>Network error please retry again later</h3>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" *ngFor="let course of completedCourses">
+        <div class="card h-100">
+          <img [src]="course.course.thumbnail" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ course.course.name }}</h5>
+            <p class="card-text">
+              {{ course.course.description }}
+            </p>
+          </div>
+          <button
+            mat-icon-button
+            aria-label="Example icon button with a open in new tab icon"
+            routerLink="/completed/{{ course.id }}"
+          >
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change profile  -->
+<div class="container" id="profileImage">
+  <div style="display: flex; justify-content: flex-end; margin-bottom: 10px">
+    <button class="btn btn-danger" (click)="closeUpload()">close</button>
+  </div>
+  <h2 class="m-3">Update profile image</h2>
+  <div class="form-group">
+    <label for="image" class="m-2" *ngIf="!profileImage"
+      >Select an image:</label
+    >
+    <label for="image" class="m-2" *ngIf="profileImage">{{
+      profileImage.name
+    }}</label>
+    <input
+      type="file"
+      id="image"
+      name="image"
+      accept="image/*"
+      (change)="getImage($event)"
+    />
+    <label class="custom-file-upload" for="image">Choose File</label>
+  </div>
+  <div *ngIf="profileImage && profileImage.size > 6000000" style="color: red">
+    Maximum file size is 6mb
+  </div>
+  <mat-progress-bar
+    mode="determinate"
+    id="p-bar"
+    value="{{ uploadProgress }}"
+    style="margin: 20px 0; visibility: hidden"
+  ></mat-progress-bar>
+
+  <button
+    type="submit"
+    class="btn btn-primary mt-3"
+    (click)="uploadImage()"
+    [disabled]="!profileImage"
+  >
+    Upload
+  </button>
+</div>
+
+<!-- change password  -->
+<div class="container" id="c-passsword">
+  <div style="display: flex; justify-content: flex-end">
+    <button class="btn btn-danger" (click)="closeChangePassword()">
+      close
+    </button>
+  </div>
+  <h2>Password Form</h2>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input
+      [formControl]="password"
+      type="password"
+      id="password"
+      name="password"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="confirm-password">Confirm Password:</label>
+    <input
+      type="password"
+      id="confirm-password"
+      [formControl]="confirmPassword"
+      name="confirm-password"
+      required
+    />
+  </div>
+  <div
+    style="color: red"
+    *ngIf="
+      password.value &&
+      confirmPassword.value &&
+      !(password.value === confirmPassword.value)
+    "
+  >
+    passsword didn't match
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="submitPassword()"
+    [disabled]="!(password.valid && confirmPassword.valid)"
+  >
+    Submit
+  </button>
+</div>

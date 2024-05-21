@@ -1,0 +1,268 @@
+<style>
+  /* Center the card */
+
+  /* Styling for the card */
+  .centered-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 300px;
+    margin: auto;
+    display: none;
+    background-color: rgb(242, 66, 66);
+  }
+
+  /* Message styling */
+  .message {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<mat-progress-bar
+  mode="indeterminate"
+  color="warn"
+  id="loading"
+  style="display: none"
+></mat-progress-bar>
+
+<div class="centered-card" id="error">
+  <p class="message" id="errorMessage"></p>
+</div>
+
+<body style="background-color: #e6e6e6" *ngIf="getpath()">
+  <div class="form-container">
+    <h2>Sign Up</h2>
+    <form [formGroup]="registrationObject">
+      <div class="form-group">
+        <label for="firstname">First Name:</label>
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          required
+          formControlName="firstname"
+        />
+        <div
+          style="color: red"
+          *ngIf="registrationObject.controls.firstname.errors?.['required']&&registrationObject.controls.firstname.dirty"
+        >
+          *firstname is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastname">Last Name:</label>
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          required
+          formControlName="lastname"
+        />
+        <div
+          style="color: red"
+          *ngIf="registrationObject.controls.lastname.errors?.['required'] && registrationObject.controls.lastname.dirty"
+        >
+          * lastname is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          formControlName="email"
+        />
+        <div></div>
+      </div>
+      <div class="form-group">
+        <label for="birthday">Date Of Birth:</label>
+        <input
+          type="date"
+          id="birthday"
+          name="birthday"
+          formControlName="dob"
+          style="
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+          "
+          required
+        />
+        <div
+          *ngIf="
+            registrationObject.controls.dob.invalid &&
+            registrationObject.controls.dob.dirty
+          "
+          style="color: red"
+        >
+          *date of birth is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          formControlName="password"
+        />
+      </div>
+    </form>
+    <div style="text-align: center; margin-top: 20px">
+      <button
+        (click)="register()"
+        [disabled]="registrationObject.invalid"
+        class="btn btn-primary"
+      >
+        register
+      </button>
+      <p style="margin: 20px">if you already have an account click here</p>
+
+      <button
+        class="btn"
+        style="
+          background-color: darkorange;
+          color: white;
+          width: 150px;
+          font-weight: 600;
+        "
+        routerLink="/auth/login"
+      >
+        login
+      </button>
+    </div>
+  </div>
+  <!-- <button class="btn btn-danger" routerLink="/login/login">click here to login</button> -->
+</body>
+
+<div class="login" *ngIf="!getpath()">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6e6e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-form {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+    }
+
+    .remember-me label {
+      margin-left: 8px;
+    }
+
+    .submit-button {
+      width: 100%;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+
+  <body>
+    <div class="login-form">
+      <h2>Login</h2>
+      <form action="/login" method="post" [formGroup]="loginData">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            formControlName="username"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            formControlName="password"
+          />
+        </div>
+        <div class="remember-me">
+          <input type="checkbox" id="remember" name="remember" />
+          <label for="remember">Remember Me</label>
+        </div>
+      </form>
+      <button
+        class="submit-button"
+        type="submit"
+        style="background-color: darkorange"
+        (click)="login()"
+      >
+        Login
+      </button>
+      <a routerLink="/forgot" class="mt-5"> forgot passsword ?</a>
+
+      <div style="text-align: center; margin-top: 20px">
+        <p>not registered click here to register</p>
+        <button
+          class="btn"
+          style="
+            background-color: darkorange;
+            color: white;
+            width: 150px;
+            font-weight: 600;
+          "
+          routerLink="/auth/register"
+        >
+          register
+        </button>
+      </div>
+    </div>
+  </body>
+  
+</div>

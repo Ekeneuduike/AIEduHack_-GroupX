@@ -1,0 +1,184 @@
+<nav
+  *ngIf="!isloggedinUser()"
+  class="navbar py-3 navbar-expand-lg bg-body-tertiary"
+>
+  <div class="container-fluid">
+    <a
+      class="navbar-brand"
+      href="#"
+      style="font-weight: bolder; color: darkorange"
+      >STUD_MAX</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon" (click)="toogleNavbar1()"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="#"
+            style="font-weight: 600"
+            routerLink="home"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item" style="cursor: pointer;">
+          <a class="nav-link"  style="font-weight: 500">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            routerLink="/course"
+          >
+            Courses
+          </a>
+          
+        </li>
+      </ul>
+      <button
+        routerLink="/auth/login"
+        class="btn"
+        type="submit"
+        style="background-color: darkorange; margin-right: 20px"
+      >
+        login
+      </button>
+    </div>
+  </div>
+</nav>
+
+<nav *ngIf="isloggedinUser()" class="sticky">
+  <div class="navbar navbar1">
+    <h2 style="color: darkorange">STUD_MAX</h2>
+    <div class="nav-itm1" id="nav-itm1">
+      <a style="text-decoration: none; color: black" routerLink="home-dash/id">
+        <h5 style="margin: 0 20px; cursor: pointer; font-weight: 600">Home</h5>
+      </a>
+      <a style="text-decoration: none; color: black" routerLink="/course">
+        <h5 style="margin: 0 20px; cursor: pointer">Courses</h5>
+      </a>
+      <a style="text-decoration: none; color: black">
+        <h5 style="margin: 0 20px; cursor: pointer; font-weight: 500">About</h5>
+      </a>
+    </div>
+
+    <div style="cursor: pointer" class="nav-itm">
+      <button
+        mat-icon-button
+        aria-label="Example icon button with a open in new tab icon"
+        routerLink="/user-dashboard"
+      >
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+    <div class="nav-sub navbar-toggler-icon" (click)="toogleNavbar()"></div>
+  </div>
+</nav>
+
+<div *ngIf="isloggedinUser()" id="nav-tog" class="nav-tog" #tog>
+  <h5
+    class="it"
+    routerLink="/user-dashboard"
+    (click)="tog.classList.toggle('nav-tog1')"
+  >
+    Profile
+  </h5>
+  <h5 class="it" routerLink="/home" (click)="tog.classList.toggle('nav-tog1')">
+    Home
+  </h5>
+  <h5
+    class="it"
+    routerLink="/course"
+    (click)="tog.classList.toggle('nav-tog1')"
+  >
+    Courses
+  </h5>
+  <h5 class="it" (click)="tog.classList.toggle('nav-tog1')">About</h5>
+</div>
+
+<div *ngIf="!isloggedinUser()" id="nav-tog1" class="nav-tog" #tog>
+  <h5
+    class="it"
+    routerLink="/auth/login"
+    (click)="tog.classList.toggle('nav-tog1')"
+  >
+    Login
+  </h5>
+  <h5 class="it" routerLink="/home" (click)="tog.classList.toggle('nav-tog1')">
+    Home
+  </h5>
+  <h5
+    class="it"
+    routerLink="/course"
+    (click)="tog.classList.toggle('nav-tog1')"
+  >
+    Courses
+  </h5>
+  <h5 class="it" (click)="tog.classList.toggle('nav-tog1')">About</h5>
+</div>
+
+<router-outlet></router-outlet>
+<!-- <section id="about">
+  <div class="container">
+    <h2>About Us</h2>
+    <p>We are STUD_MAX, the premier online learning platform leveraging the latest cutting-edge AI technology to enhance your educational experience. Our mission is to provide accessible, high-quality courses tailored to empower learners worldwide.</p>
+    <a routerLink="/course" class="btn-enroll">Explore Our Courses</a>
+  </div>
+</section>
+<style>
+  
+   /* About Section Styling */
+#about {
+  background-color: #f4f4f4;
+  padding: 40px 0;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#about .container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+#about h2 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+#about p {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.enroll-btn {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.enroll-btn:hover {
+  background-color: #003d82;
+}
+
+</style> -->

@@ -1,0 +1,75 @@
+
+
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 200;
+   
+}
+.navbar1{
+    padding: 20px;
+    background-color: rgb(243, 243, 243);
+}
+.it{
+    color: rgb(79, 75, 75);
+}
+
+.nav-tog{
+    padding: 20px;
+    display: none;
+    z-index: 10;
+}
+
+.nav-tog1{
+    display: block;
+    transition: slidein 2s ease;
+    z-index: 10;
+    position: sticky;
+    top: 77px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.it:hover{
+    color:darkorange;
+    cursor: pointer;
+}
+.nav-itm1{
+    display: flex;
+}
+.nav-sub{
+    display: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width:992px) {
+    .nav-itm {
+        display: none;
+    }
+    #nav-itm1{
+        display: none;
+    }
+    .nav-sub{
+        display: block;
+    }
+    
+}
+@media screen and (min-width:992px) {
+    .nav-tog1{
+        display: none;
+    }
+}
+
+@keyframes slidein {
+    from{
+        transform: translateY(-100%);
+           }
+    to{
+    transform: translateY(0);
+    }
+    
+}
+
+/* Container holding the input and button */
+
+  

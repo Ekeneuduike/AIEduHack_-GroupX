@@ -1,0 +1,92 @@
+.quiz-container {
+    width: 100%;
+    padding: 20px;
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.option {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+}
+
+.option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.option:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.option input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.option input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.loading {
+    font-weight: bold;
+    display: inline-block;
+    font-family: monospace;
+    font-size: 30px;
+    clip-path: inset(0 3ch 0 0); /* Adjust the width as needed */
+    animation: loading 1s steps(4) infinite;
+    color: black;
+  }
+  
+  @keyframes loading {
+    0%,
+    100% {
+      clip-path: inset(0 3ch 0 0);
+    }
+    25% {
+      clip-path: inset(0 2ch 0 0);
+    }
+    50% {
+      clip-path: inset(0 1ch 0 0);
+    }
+    75% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  
